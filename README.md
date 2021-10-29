@@ -1,4 +1,3 @@
-[![GitHub All Releases](https://img.shields.io/github/downloads/tfsec/tfsec-sarif-action/total)](https://github.com/tfsec/tfsec-sarif-action/releases)
 # tfsec-sarif-action
 
 ## Description
@@ -34,3 +33,5 @@ jobs:
           # Path to SARIF file relative to the root of the repository
           sarif_file: tfsec.sarif         
 ```
+
+### Inspired [here](https://github.com/aquasecurity/tfsec-sarif-action)

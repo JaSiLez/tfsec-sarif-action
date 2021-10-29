@@ -1,6 +1,6 @@
 name: 'Run tfsec with sarif upload'
 description: 'Run tfsec against terraform code base and upload the sarif output to the github repo'
-author: 'Owen Rumney'
+author: 'JaSilez'
 
 inputs:
   working_directory:
@@ -19,8 +19,7 @@ outputs:
   tfsec-return-code:
     description: 'tfsec command return code'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-branding:
-  icon: 'search'
-  color: 'gray-dark'
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/tfsec.sh
+      shell: bash
