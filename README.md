@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: tfsec
-        uses: tfsec/tfsec-sarif-action@master
+        uses: JaSiLez/tfsec-sarif-action@pgx
         with:
           sarif_file: tfsec.sarif         
 
