@@ -1,4 +1,4 @@
-name: 'Run tfsec with sarif upload'
+name: 'Run tfsec with Report upload'
 description: 'Run tfsec against terraform code base and upload the sarif output to the github repo'
 author: 'JaSilez'
 
@@ -8,8 +8,9 @@ inputs:
       Directory to run the action on, from the repo root.
       Default is . ( root of the repository)
     default: '.'
-  sarif_file:
-    description: The path to write the sarif report, defaults to tfsec.sarif
+  report_file:
+    description: The path to write the sarif report, defaults to tfsec.report
+    default: 'tfsec.report'
   tfvars_file:
     description: The tfvars file to use for the scan
   tfsec_version:
@@ -37,8 +38,8 @@ runs:
           echo "::debug::Using tfvars file $INPUT_TFVARS_FILE"
           TFVARS_OPTION="--tfvars-file $INPUT_TFVARS_FILE"
         fi
-        echo {} >$INPUT_SARIF_FILE
-        tfsec --format=sarif "$INPUT_WORKING_DIRECTORY" $TFVARS_OPTION >$INPUT_SARIF_FILE
+        echo {} >$INPUT_REPORT_FILE
+        tfsec  --force-all-dirs "$INPUT_WORKING_DIRECTORY" $TFVARS_OPTION 2>&1 | tee -a $INPUT_REPORT_FILE
         tfsec_return="$PIPESTATUS[0]" exit_code=$
         echo ::set-output name=tfsec-return-code::"$tfsec_return"
       shell: bash
@@ -46,4 +47,4 @@ runs:
         INPUT_TFSEC_VERSION: "${{ inputs.tfsec_version }}"
         INPUT_WORKING_DIRECTORY: "${{ inputs.working_directory }}"
         INPUT_TFVARS_FILE: "${{ inputs.tfvars_file }}"
-        INPUT_SARIF_FILE: "${{ inputs.sarif_file }}"
+        INPUT_REPORT_FILE: "${{ inputs.report_file }}"
