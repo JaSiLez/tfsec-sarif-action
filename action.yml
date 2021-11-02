@@ -43,7 +43,7 @@ runs:
         echo ::set-output name=tfsec-return-code::"$tfsec_return"
       shell: bash
       env:
-        INPUT_TFSEC_VERSION: "${{ input.tfsec_version }}"
-        INPUT_WORKING_DIRECTORY: "${{ input.working_directory }}"
-        INPUT_TFVARS_FILE: "${{ input.tfvars_file }}"
-        INPUT_SARIF_FILE: "${{ input.sarif_file }}"
+        INPUT_TFSEC_VERSION: "${{ inputs.tfsec_version }}"
+        INPUT_WORKING_DIRECTORY: "${{ inputs.working_directory }}"
+        INPUT_TFVARS_FILE: "${{ inputs.tfvars_file }}"
+        INPUT_SARIF_FILE: "${{ inputs.sarif_file }}"
